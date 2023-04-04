@@ -3,6 +3,7 @@ import {createTheme, ThemeProvider} from "@mui/material/styles"
 import { blueGrey, pink } from "@mui/material/colors";
 import { Provider } from "react-redux";
 import store from "./app/store";
+import { CssBaseline } from "@mui/material";
 
 
 function App() {
@@ -20,9 +21,11 @@ function App() {
   return (
     <>
     <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <AppRouter />
+      <Provider store= {store}>
+         <CssBaseline/>
+    <AppRouter/>
       </Provider>
+   
     </ThemeProvider>
     </>
   );

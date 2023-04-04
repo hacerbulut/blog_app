@@ -10,8 +10,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const butonStyle = {
   color: "white",
@@ -22,15 +22,23 @@ const butonStyle = {
   },
 };
 const BlogCard = () => {
+  const navigate = useNavigate()
+
+
   const { blogsList } = useSelector((state) => state.blog);
   console.log(blogsList);
+
+  const handleNavigate=(id)=>{
+    navigate(`/detail/${id}`)
+
+  }
 
   return (
     <Grid
       container
       align="center"
       spacing={2}
-      sx={{ minHeight: "90vh", display: "flex", alignItems: "center", p: 2 }}
+      sx={{ minHeight: "90vh", display: "flex", alignItems: "center" }}
     >
       {blogsList?.map((item) => {
         return (
@@ -38,7 +46,7 @@ const BlogCard = () => {
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
                 component="img"
-                alt="green iguana"
+                alt="frontend"
                 height="140"
                 image={item?.image}
               />
@@ -49,14 +57,14 @@ const BlogCard = () => {
                   component="div"
                   align="center"
                 >
-                  {item.title}
+                  {item?.title}
                 </Typography>
                 <Typography
                   variant="body2"
                   color="text.secondary"
                   align="justify"
                 >
-                 {item.content}
+                  {item.content}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" mt={2}>
                   {item.publish_date}
@@ -65,10 +73,10 @@ const BlogCard = () => {
                   sx={{ display: "flex", alignItems: "center", mt: 2 }}
                 >
                   {/* <Avatar
-                        alt="Remy Sharp"
-                        src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
-                        sx={{ width: 24, height: 24,mt:2 }}
-                      />  */}
+                  alt="Remy Sharp"
+                  src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
+                  sx={{ width: 24, height: 24,mt:2 }}
+                />  */}
                   <AccountCircleIcon />
                   <span>{item.author}</span>
                 </Typography>
@@ -94,13 +102,7 @@ const BlogCard = () => {
                     <span>{item.post_views}</span>
                   </IconButton>
                 </Typography>
-                <Button
-                  size="small"
-                  sx={butonStyle}
-                  variant="contained"
-                  component={Link}
-                  to="/detail/1"
-                >
+                <Button size="small" sx={butonStyle} variant="contained">
                   Read More
                 </Button>
               </CardActions>
